@@ -37,22 +37,57 @@ public class Ajedrez {
         tablero[7][7] = new Torre(7, 7, 'T', true);
         Imprimir(tablero, 0, 0);
         boolean estado = true;
+        boolean blancas = true;
         while (estado == true) {
+            if (blancas == true) {
+                System.out.println("Turno Blancas");
+            } else {
+                System.out.println("Turno Negras");
+            }
             System.out.println("ingrese coordenada en x de la pieza que movera: ");
             int x = read.nextInt();
             System.out.println("ingrese coordenada en y de la pieza que movera: ");
             int y = read.nextInt();
+            Pieza seleccionada = tablero[x][y];
+            while (seleccionada.isWhite() && blancas == false) {
+                System.out.println("no es su turno");
+                System.out.println("ingrese coordenada en x de la pieza que movera: ");
+                x = read.nextInt();
+                System.out.println("ingrese coordenada en y de la pieza que movera: ");
+                y = read.nextInt();
+                seleccionada = tablero[x][y];
+            }
             System.out.println("ingrese coordenada en x de la casilla donde movera: ");
             int x2 = read.nextInt();
             System.out.println("ingrese coordenada en y de la casilla donde movera: ");
             int y2 = read.nextInt();
-            
+            if (seleccionada instanceof Torre) {
+
+            } else if (seleccionada instanceof Caballo) {
+
+            } else if (seleccionada instanceof Alfil) {
+
+            } else if (seleccionada instanceof Rey) {
+
+            } else if (seleccionada instanceof Reina) {
+
+            } else if (seleccionada instanceof Peon) {
+
+            }
+            tablero[x][y] = new Pieza(x, y, ' ', false);
+            tablero[x2][y2] = seleccionada;
+            Imprimir(tablero, 0, 0);
+            if (blancas == true) {
+                blancas = false;
+            } else {
+                blancas = true;
+            }
         }
     }
 
     public static void Imprimir(Pieza[][] matriz, int filas, int cols) {
         if (filas == matriz.length - 1 && cols == matriz[0].length - 1) {
-            System.out.print("[" + matriz[filas][cols].getLetra() + "]" + "   ");
+            System.out.print("[" + matriz[filas][cols].getLetra() + "]" + "    \n");
         } else {
             if (cols == matriz[0].length - 1) {
                 System.out.println("[" + matriz[filas][cols].getLetra() + "]");
