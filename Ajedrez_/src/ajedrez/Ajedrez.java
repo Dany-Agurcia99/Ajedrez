@@ -8,7 +8,7 @@ public class Ajedrez {
         Scanner read = new Scanner(System.in);
         Pieza[][] tablero = new Pieza[8][8];
         boolean blanco = true;
-        //llenando piezas negras
+//llenando piezas negras
         tablero[0][0] = new Torre(0, 0, 'T', false);
         tablero[0][1] = new Caballo(0, 1, 'C', false);
         tablero[0][2] = new Alfil(0, 2, 'A', false);
@@ -17,21 +17,21 @@ public class Ajedrez {
         tablero[0][5] = new Alfil(0, 5, 'A', false);
         tablero[0][6] = new Caballo(0, 6, 'C', false);
         tablero[0][7] = new Torre(0, 7, 'T', false);
-        //llenando peones negros
+//llenando peones negros
         for (int i = 0; i < tablero[1].length; i++) {
             tablero[1][i] = new Peon(1, i, 'P', false);
         }
-        //llenando espacios
+//llenando espacios
         for (int i = 2; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
                 tablero[i][j] = new Pieza(i, j, ' ', false);
             }
         }
-        //llenando peones blancos
+//llenando peones blancos
         for (int i = 0; i < tablero[6].length; i++) {
             tablero[6][i] = new Peon(1, i, 'P', true);
         }
-        //llenando piezas blancas
+//llenando piezas blancas
         tablero[7][0] = new Torre(7, 0, 'T', true);
         tablero[7][1] = new Caballo(7, 1, 'C', true);
         tablero[7][2] = new Alfil(7, 2, 'A', true);
@@ -55,7 +55,7 @@ public class Ajedrez {
             int y = read.nextInt();
             Pieza seleccionada = tablero[x][y];
             System.out.println(seleccionada.isWhite());
-            //validar si es blanca o no
+//validar si es blanca o no
             if (blancas == false) {
                 while (seleccionada.isWhite()) {
                     System.out.println("Es el turno de las piezas Negras");
@@ -75,14 +75,14 @@ public class Ajedrez {
                     seleccionada = tablero[x][y];
                 }
             }
-            //fin de validar si es blanca o no
+//fin de validar si es blanca o no
             System.out.println("ingrese coordenada en x de la casilla donde movera: ");
             int x2 = read.nextInt();
             System.out.println("ingrese coordenada en y de la casilla donde movera: ");
             int y2 = read.nextInt();
-            //inicio validacion movimiento
+//inicio validacion movimiento
             if (seleccionada instanceof Torre) {
-                while (seleccionada.movimiento(x, y) == false) {
+                while (seleccionada.movimiento(x, y, x2, y2) == false) {
                     System.out.println("el movimiento no es valido");
                     System.out.println("ingrese coordenada en x de la casilla donde movera: ");
                     x2 = read.nextInt();
@@ -90,7 +90,7 @@ public class Ajedrez {
                     y2 = read.nextInt();
                 }
             } else if (seleccionada instanceof Caballo) {
-                while (seleccionada.movimiento(x, y) == false) {
+                while (seleccionada.movimiento(x, y, x2, y2) == false) {
                     System.out.println("el movimiento no es valido");
                     System.out.println("ingrese coordenada en x de la casilla donde movera: ");
                     x2 = read.nextInt();
@@ -98,7 +98,7 @@ public class Ajedrez {
                     y2 = read.nextInt();
                 }
             } else if (seleccionada instanceof Alfil) {
-                while (seleccionada.movimiento(x, y) == false) {
+                while (seleccionada.movimiento(x, y, x2, y2) == false) {
                     System.out.println("el movimiento no es valido");
                     System.out.println("ingrese coordenada en x de la casilla donde movera: ");
                     x2 = read.nextInt();
@@ -106,7 +106,7 @@ public class Ajedrez {
                     y2 = read.nextInt();
                 }
             } else if (seleccionada instanceof Rey) {
-                while (seleccionada.movimiento(x, y) == false) {
+                while (seleccionada.movimiento(x, y, x2, y2) == false) {
                     System.out.println("el movimiento no es valido");
                     System.out.println("ingrese coordenada en x de la casilla donde movera: ");
                     x2 = read.nextInt();
@@ -114,7 +114,7 @@ public class Ajedrez {
                     y2 = read.nextInt();
                 }
             } else if (seleccionada instanceof Reina) {
-                while (seleccionada.movimiento(x, y) == false) {
+                while (seleccionada.movimiento(x, y, x2, y2) == false) {
                     System.out.println("el movimiento no es valido");
                     System.out.println("ingrese coordenada en x de la casilla donde movera: ");
                     x2 = read.nextInt();
@@ -122,7 +122,7 @@ public class Ajedrez {
                     y2 = read.nextInt();
                 }
             } else if (seleccionada instanceof Peon) {
-                while (seleccionada.movimiento(x, y) == false) {
+                while (seleccionada.movimiento(x, y, x2, y2) == false) {
                     System.out.println("el movimiento no es valido");
                     System.out.println("ingrese coordenada en x de la casilla donde movera: ");
                     x2 = read.nextInt();
@@ -130,7 +130,7 @@ public class Ajedrez {
                     y2 = read.nextInt();
                 }
             }
-            //fin validacion movimiento
+//fin validacion movimiento
             tablero[x][y] = new Pieza(x, y, ' ', false);
             tablero[x2][y2] = seleccionada;
             Imprimir(tablero, 0, 0);
@@ -141,9 +141,7 @@ public class Ajedrez {
             }
         }
     }
-    
 //metodo recursivo
-
     public static void Imprimir(Pieza[][] matriz, int filas, int cols) {
         if (filas == matriz.length - 1 && cols == matriz[0].length - 1) {
             System.out.print("[" + matriz[filas][cols].getLetra() + "]" + "    \n");

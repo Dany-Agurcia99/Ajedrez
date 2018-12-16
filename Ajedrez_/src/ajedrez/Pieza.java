@@ -50,7 +50,7 @@ public class Pieza {
     }
 
     //polimorfismo
-    public boolean movimiento(int x, int y) {
+    public boolean movimiento(int x, int y, int x2, int y2) {
         boolean valido = false;
         return valido;
     }

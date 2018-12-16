@@ -39,7 +39,7 @@ public class Peon extends Pieza {
     }
 
     @Override
-    public boolean movimiento(int x, int y) {
+    public boolean movimiento(int x, int y, int x2, int y2) {
         boolean valido = true;
         return valido;
     }
