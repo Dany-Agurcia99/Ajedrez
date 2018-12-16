@@ -41,6 +41,15 @@ public class Reina extends Pieza {
     @Override
     public boolean movimiento(int x, int y, int x2, int y2) {
         boolean valido = true;
+        if (x2 % 2 == 0) {
+            if (y2 % 2 != 0) {
+                valido = false;
+            }
+        } else if (x2 % 2 != 0) {
+            if (y2 % 2 == 0) {
+                valido = false;
+            }
+        }
         return valido;
     }
 }

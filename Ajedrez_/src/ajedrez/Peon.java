@@ -41,6 +41,21 @@ public class Peon extends Pieza {
     @Override
     public boolean movimiento(int x, int y, int x2, int y2) {
         boolean valido = true;
+        if (white == true) {
+            if (y != y2) {
+                valido = false;
+            }
+            if (x + 1 != x2) {
+                valido = false;
+            }
+        } else {
+            if (x != x2) {
+                valido = false;
+            }
+            if (y + 1 != y2) {
+                valido = false;
+            }
+        }
         return valido;
     }
 }

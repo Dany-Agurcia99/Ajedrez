@@ -4,8 +4,14 @@ import java.util.Scanner;
 
 public class Ajedrez {
 
+    public static int x;
+    public static int y;
+    public static int x2;
+    public static int y2;
+    public static Scanner read = new Scanner(System.in);
+
     public static void main(String[] args) {
-        Scanner read = new Scanner(System.in);
+
         Pieza[][] tablero = new Pieza[8][8];
         boolean blanco = true;
 //llenando piezas negras
@@ -50,9 +56,9 @@ public class Ajedrez {
                 System.out.println("Turno Negras");
             }
             System.out.println("ingrese coordenada en x de la pieza que movera: ");
-            int x = read.nextInt();
+            x = read.nextInt();
             System.out.println("ingrese coordenada en y de la pieza que movera: ");
-            int y = read.nextInt();
+            y = read.nextInt();
             Pieza seleccionada = tablero[x][y];
             System.out.println(seleccionada.isWhite());
 //validar si es blanca o no
@@ -77,60 +83,22 @@ public class Ajedrez {
             }
 //fin de validar si es blanca o no
             System.out.println("ingrese coordenada en x de la casilla donde movera: ");
-            int x2 = read.nextInt();
+            x2 = read.nextInt();
             System.out.println("ingrese coordenada en y de la casilla donde movera: ");
-            int y2 = read.nextInt();
+            y2 = read.nextInt();
+
 //inicio validacion movimiento
-            if (seleccionada instanceof Torre) {
-                while (seleccionada.movimiento(x, y, x2, y2) == false) {
-                    System.out.println("el movimiento no es valido");
-                    System.out.println("ingrese coordenada en x de la casilla donde movera: ");
-                    x2 = read.nextInt();
-                    System.out.println("ingrese coordenada en y de la casilla donde movera: ");
-                    y2 = read.nextInt();
-                }
-            } else if (seleccionada instanceof Caballo) {
-                while (seleccionada.movimiento(x, y, x2, y2) == false) {
-                    System.out.println("el movimiento no es valido");
-                    System.out.println("ingrese coordenada en x de la casilla donde movera: ");
-                    x2 = read.nextInt();
-                    System.out.println("ingrese coordenada en y de la casilla donde movera: ");
-                    y2 = read.nextInt();
-                }
-            } else if (seleccionada instanceof Alfil) {
-                while (seleccionada.movimiento(x, y, x2, y2) == false) {
-                    System.out.println("el movimiento no es valido");
-                    System.out.println("ingrese coordenada en x de la casilla donde movera: ");
-                    x2 = read.nextInt();
-                    System.out.println("ingrese coordenada en y de la casilla donde movera: ");
-                    y2 = read.nextInt();
-                }
-            } else if (seleccionada instanceof Rey) {
-                while (seleccionada.movimiento(x, y, x2, y2) == false) {
-                    System.out.println("el movimiento no es valido");
-                    System.out.println("ingrese coordenada en x de la casilla donde movera: ");
-                    x2 = read.nextInt();
-                    System.out.println("ingrese coordenada en y de la casilla donde movera: ");
-                    y2 = read.nextInt();
-                }
-            } else if (seleccionada instanceof Reina) {
-                while (seleccionada.movimiento(x, y, x2, y2) == false) {
-                    System.out.println("el movimiento no es valido");
-                    System.out.println("ingrese coordenada en x de la casilla donde movera: ");
-                    x2 = read.nextInt();
-                    System.out.println("ingrese coordenada en y de la casilla donde movera: ");
-                    y2 = read.nextInt();
-                }
-            } else if (seleccionada instanceof Peon) {
-                while (seleccionada.movimiento(x, y, x2, y2) == false) {
-                    System.out.println("el movimiento no es valido");
-                    System.out.println("ingrese coordenada en x de la casilla donde movera: ");
-                    x2 = read.nextInt();
-                    System.out.println("ingrese coordenada en y de la casilla donde movera: ");
-                    y2 = read.nextInt();
-                }
-            }
+            movimiento(seleccionada);
 //fin validacion movimiento
+//validar si la hay una pieza ya
+            while (tablero[x2][y2].getLetra() != ' ') {
+                System.out.println("la casilla contiene una pieza");
+                System.out.println("ingrese coordenada en x de la casilla donde movera: ");
+                x2 = read.nextInt();
+                System.out.println("ingrese coordenada en y de la casilla donde movera: ");
+                y2 = read.nextInt();
+                movimiento(seleccionada);
+            }
             tablero[x][y] = new Pieza(x, y, ' ', false);
             tablero[x2][y2] = seleccionada;
             Imprimir(tablero, 0, 0);
@@ -142,6 +110,59 @@ public class Ajedrez {
         }
     }
 //metodo recursivo
+
+    public static void movimiento(Pieza seleccionada) {
+        if (seleccionada instanceof Torre) {
+            while (seleccionada.movimiento(x, y, x2, y2) == false) {
+                System.out.println("el movimiento no es valido");
+                System.out.println("ingrese coordenada en x de la casilla donde movera: ");
+                x2 = read.nextInt();
+                System.out.println("ingrese coordenada en y de la casilla donde movera: ");
+                y2 = read.nextInt();
+            }
+        } else if (seleccionada instanceof Caballo) {
+            while (seleccionada.movimiento(x, y, x2, y2) == false) {
+                System.out.println("el movimiento no es valido");
+                System.out.println("ingrese coordenada en x de la casilla donde movera: ");
+                x2 = read.nextInt();
+                System.out.println("ingrese coordenada en y de la casilla donde movera: ");
+                y2 = read.nextInt();
+            }
+        } else if (seleccionada instanceof Alfil) {
+            while (seleccionada.movimiento(x, y, x2, y2) == false) {
+                System.out.println("el movimiento no es valido");
+                System.out.println("ingrese coordenada en x de la casilla donde movera: ");
+                x2 = read.nextInt();
+                System.out.println("ingrese coordenada en y de la casilla donde movera: ");
+                y2 = read.nextInt();
+            }
+        } else if (seleccionada instanceof Rey) {
+            while (seleccionada.movimiento(x, y, x2, y2) == false) {
+                System.out.println("el movimiento no es valido");
+                System.out.println("ingrese coordenada en x de la casilla donde movera: ");
+                x2 = read.nextInt();
+                System.out.println("ingrese coordenada en y de la casilla donde movera: ");
+                y2 = read.nextInt();
+            }
+        } else if (seleccionada instanceof Reina) {
+            while (seleccionada.movimiento(x, y, x2, y2) == false) {
+                System.out.println("el movimiento no es valido");
+                System.out.println("ingrese coordenada en x de la casilla donde movera: ");
+                x2 = read.nextInt();
+                System.out.println("ingrese coordenada en y de la casilla donde movera: ");
+                y2 = read.nextInt();
+            }
+        } else if (seleccionada instanceof Peon) {
+            while (seleccionada.movimiento(x, y, x2, y2) == false) {
+                System.out.println("el movimiento no es valido");
+                System.out.println("ingrese coordenada en x de la casilla donde movera: ");
+                x2 = read.nextInt();
+                System.out.println("ingrese coordenada en y de la casilla donde movera: ");
+                y2 = read.nextInt();
+            }
+        }
+    }
+
     public static void Imprimir(Pieza[][] matriz, int filas, int cols) {
         if (filas == matriz.length - 1 && cols == matriz[0].length - 1) {
             System.out.print("[" + matriz[filas][cols].getLetra() + "]" + "    \n");

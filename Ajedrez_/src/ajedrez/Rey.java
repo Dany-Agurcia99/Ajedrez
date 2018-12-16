@@ -41,6 +41,9 @@ public class Rey extends Pieza {
     @Override
     public boolean movimiento(int x, int y, int x2, int y2) {
         boolean valido = true;
+        if ((x2 > x + 1 || y2 > y + 1) || (x2 < x - 1 || y2 < y - 1)) {
+            valido = false;
+        }
         return valido;
     }
 }
